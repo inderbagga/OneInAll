@@ -1,42 +1,49 @@
 package com.inderbagga.oneinall.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.inderbagga.oneinall.R
 import com.inderbagga.oneinall.data.model.Post
+import com.inderbagga.oneinall.databinding.ListItemBinding
 import com.inderbagga.oneinall.ui.adapter.PostsAdapter.*
 
-class PostsAdapter(private var postList: ArrayList<Post>) : RecyclerView.Adapter<PostViewHolder>() {
+class PostsAdapter : ListAdapter<Post, PostViewHolder>(
+    TaskDiffCallBack()) {
 
-    class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    //This check runs on background thread
+    class TaskDiffCallBack : DiffUtil.ItemCallback<Post>() {
+        override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
+            return oldItem.id == newItem.id;
+        }
 
-        val id=itemView.findViewById(R.id.postId) as TextView
-        val title=itemView.findViewById(R.id.postTitle) as TextView
+        override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
+            return oldItem == newItem
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
-        return PostViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.list_item,parent,false))
+
+        val listItemBinding = ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return PostViewHolder(listItemBinding)
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
 
-        val post=postList[position]
+        val itemPost = getItem(position)
 
-        holder.apply {
-
-            id.text=post.id.toString()
-            title.text=post.title.toString()
+        itemPost?.let {
+            holder.bind(it)
         }
     }
 
-    override fun getItemCount(): Int = postList.size
+    inner class PostViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root){
 
-    fun update(posts: List<Post>) {
-
-        postList= posts as ArrayList<Post>
-        notifyDataSetChanged()
+        fun bind(it: Post) {
+            binding.post=it
+            binding.executePendingBindings()
+        }
     }
 }

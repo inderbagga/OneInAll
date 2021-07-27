@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">OneInAll</string>
 
-    <string name="remote_data_msg">Data fetched from Server via Retrofit.</string>
+    <string name="fetching_remote_data_msg">Fetching data from Server via Retrofit.</string>
+    <string name="remote_data_msg">Data presented via livedata and databinding.</string>
     <string name="file_json_msg">Data loaded from Json File.</string>
 </resources>

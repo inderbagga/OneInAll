@@ -9,15 +9,14 @@ import kotlinx.coroutines.launch
 
 class PostsViewModel(private val repository: Repo) : ViewModel() {
 
-    val postsLiveData: MutableLiveData<List<Post>> = MutableLiveData()
+    val posts: MutableLiveData<List<Post>> = MutableLiveData()
+    val isLoading: MutableLiveData<Boolean> = MutableLiveData()
 
     fun getPosts(){
 
         viewModelScope.launch {
-
-            postsLiveData.value=repository.getPosts()
-
+            isLoading.postValue(true)
+            posts.postValue(repository.getPosts())
         }
     }
-
 }
