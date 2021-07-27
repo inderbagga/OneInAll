@@ -3,7 +3,7 @@ package com.inderbagga.oneinall.utils
 import android.content.Context
 import java.io.IOException
 
-object AssetManager {
+object Asset {
 
     /*function for reading JSON file from assets*/
     fun getJsonDataFromAsset(context: Context, fileName: String): String? {

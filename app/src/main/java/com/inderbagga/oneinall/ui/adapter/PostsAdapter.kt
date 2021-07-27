@@ -9,7 +9,7 @@ import com.inderbagga.oneinall.R
 import com.inderbagga.oneinall.data.model.Post
 import com.inderbagga.oneinall.ui.adapter.PostsAdapter.*
 
-class PostsAdapter(private val postList: ArrayList<Post>) : RecyclerView.Adapter<PostViewHolder>() {
+class PostsAdapter(private var postList: ArrayList<Post>) : RecyclerView.Adapter<PostViewHolder>() {
 
     class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
@@ -33,4 +33,10 @@ class PostsAdapter(private val postList: ArrayList<Post>) : RecyclerView.Adapter
     }
 
     override fun getItemCount(): Int = postList.size
+
+    fun update(posts: List<Post>) {
+
+        postList= posts as ArrayList<Post>
+        notifyDataSetChanged()
+    }
 }
