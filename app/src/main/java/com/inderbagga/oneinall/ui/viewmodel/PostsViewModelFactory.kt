@@ -2,10 +2,13 @@ package com.inderbagga.oneinall.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.inderbagga.oneinall.data.repo.Repo
+import com.inderbagga.oneinall.repo.RepoImpl
 
-class PostsViewModelFactory(private val repo: Repo) : ViewModelProvider.Factory {
+class PostsViewModelFactory(private val repository: RepoImpl)
+    : ViewModelProvider.NewInstanceFactory() {
+
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return PostsViewModel(repo) as T
+        return PostsViewModel(repository) as T
     }
 }
