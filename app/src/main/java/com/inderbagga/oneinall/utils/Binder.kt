@@ -4,7 +4,7 @@ import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-object Bind {
+object Binder {
 
     @JvmStatic
     @BindingAdapter("android:visibility")

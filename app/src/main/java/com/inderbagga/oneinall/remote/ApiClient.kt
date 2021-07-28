@@ -7,7 +7,7 @@ object ApiClient {
 
     private const val ENDPOINT="https://jsonplaceholder.typicode.com"
 
-   private val retrofit by lazy {
+    private val retrofit by lazy {
 
         Retrofit.Builder()
             .baseUrl(ENDPOINT)

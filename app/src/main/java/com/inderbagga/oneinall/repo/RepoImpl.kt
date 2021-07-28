@@ -6,12 +6,11 @@ import com.inderbagga.oneinall.data.RemoteDao
 import com.inderbagga.oneinall.data.model.Post
 import com.inderbagga.oneinall.data.repo.Repo
 import com.inderbagga.oneinall.utils.Network
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
-class RepoImpl private constructor(val context:Context, private val fileDao: FileDao, private val remoteDao: RemoteDao) : Repo{
-
-    init {
-        fileDao.loadFile(context)
-    }
+class RepoImpl private constructor(private val context:Context, private val fileDao: FileDao,  val remoteDao: RemoteDao) : Repo{
 
     companion object {
         @Volatile private var instance: RepoImpl? = null
@@ -20,6 +19,13 @@ class RepoImpl private constructor(val context:Context, private val fileDao: Fil
             instance ?: synchronized(this) {
                 instance ?: RepoImpl(context,fileDao,remoteDao).also { instance = it }
             }
+    }
+
+    init {
+
+        GlobalScope.launch(Dispatchers.IO) {
+            fileDao.loadFile(context)
+        }
     }
 
     override suspend fun getPosts(): List<Post>? = if(Network.isConnected(context)){
