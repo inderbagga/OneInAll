@@ -1,5 +1,10 @@
 package com.inderbagga.oneinall.data
 
+import com.inderbagga.oneinall.data.dao.FileDao
+import com.inderbagga.oneinall.data.dao.FileDaoImpl
+import com.inderbagga.oneinall.data.dao.RemoteDao
+import com.inderbagga.oneinall.data.dao.RemoteDaoImpl
+
 class DataSourceImpl :DataSource {
 
     override val fileDao: FileDao
@@ -7,13 +12,4 @@ class DataSourceImpl :DataSource {
 
     override val remoteDao: RemoteDao
             = RemoteDaoImpl()
-
-    companion object {
-        @Volatile private var instance: DataSourceImpl? = null
-
-        fun getInstance() =
-            instance ?: synchronized(this) {
-                instance ?: DataSourceImpl().also { instance = it }
-            }
-    }
 }

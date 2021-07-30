@@ -1,12 +1,13 @@
-package com.inderbagga.oneinall.data
+package com.inderbagga.oneinall.data.dao
 
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.inderbagga.oneinall.data.model.Post
 import com.inderbagga.oneinall.utils.Asset
+import javax.inject.Inject
 
-class FileDaoImpl : FileDao {
+class FileDaoImpl @Inject constructor(): FileDao {
 
     var _posts: List<Post>?=null
 

@@ -2,9 +2,10 @@ package com.inderbagga.oneinall.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.inderbagga.oneinall.repo.RepoImpl
+import com.inderbagga.oneinall.data.repo.Repo
+import javax.inject.Inject
 
-class PostsViewModelFactory(private val repository: RepoImpl)
+class PostsViewModelFactory @Inject constructor(private val repository: Repo)
     : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")

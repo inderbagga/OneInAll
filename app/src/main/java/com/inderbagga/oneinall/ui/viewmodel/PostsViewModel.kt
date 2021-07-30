@@ -4,10 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.inderbagga.oneinall.data.model.Post
-import com.inderbagga.oneinall.repo.RepoImpl
+import com.inderbagga.oneinall.data.repo.Repo
 import kotlinx.coroutines.launch
 
-class PostsViewModel( private val repo: RepoImpl) : ViewModel() {
+class PostsViewModel( private val repo: Repo) : ViewModel() {
 
     val posts: MutableLiveData<List<Post>> = MutableLiveData()
     val isLoading: MutableLiveData<Boolean> = MutableLiveData()

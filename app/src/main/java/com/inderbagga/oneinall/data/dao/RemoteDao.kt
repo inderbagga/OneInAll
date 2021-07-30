@@ -1,4 +1,4 @@
-package com.inderbagga.oneinall.data
+package com.inderbagga.oneinall.data.dao
 
 import com.inderbagga.oneinall.data.model.Post
 

@@ -10,9 +10,14 @@ import com.inderbagga.oneinall.R
 import com.inderbagga.oneinall.databinding.ActivityMainBinding
 import com.inderbagga.oneinall.ui.adapter.PostsAdapter
 import com.inderbagga.oneinall.ui.viewmodel.PostsViewModel
-import com.inderbagga.oneinall.utils.Injector
+import com.inderbagga.oneinall.ui.viewmodel.PostsViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    @Inject lateinit var postsViewModelFactory: PostsViewModelFactory
 
     private lateinit var viewModel: PostsViewModel
     private lateinit var postsAdapter: PostsAdapter
@@ -31,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             it.adapter=postsAdapter
         }
 
-        viewModel=ViewModelProvider(this,Injector.providePostsViewModelFactory(this)).get(PostsViewModel::class.java)
+        viewModel=ViewModelProvider(this,postsViewModelFactory).get(PostsViewModel::class.java)
 
         viewModel.posts.observe(this,  {
 
